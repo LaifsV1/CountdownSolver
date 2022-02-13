@@ -85,7 +85,7 @@ e.g. `[5;2;3;4]` and `[2;5;4;3]` would both normalise to the same configuration 
 - *Minimisation*: instead of remembering every expression `E_i` in an element `(N_i,E_i)` in `C`, we remember an ordered list of numbers `I_i` used to produce `N_i`.
 e.g. `[(2,1+1); (3,2+1); (5,5); (6,3*2)] => [(2,[1;1]); (3,[1;2]); (5,[5]); (6,[2;3])]`
 
-The intuition is that minimisation captures an equivalence class defined by transposition (rearrangement) of expressions as symbolic expressions (without reduction), whereas normalisation captures an equivalence class defined by the order in which non-interfering pairs are chosen, as well as some convergent paths in the exploration.
+The intuition is that minimisation captures an equivalence class defined by transposition (rearrangement) of expressions as symbolic expressions (without reduction), whereas normalisation captures an equivalence class defined by the order in which non-interfering pairs are chosen, as well as some convergent paths in the exploration (including associative operations on the same numbers).
 
 ### Tail Recursion
 Transforming all functions to be tail-recursive is an obvious standard optimisation that was very significant in this exercise. I observed a speed up of at least an order of magnitude or two just by making every function tail recursive.
