@@ -3,7 +3,9 @@ A simple solver for a puzzle game similar to the Numbers round of the Countdown 
 
 ## Usage
 
-Solver found in `src/countdown.ml`. Use `timed_solve <target> <numbers list>` to run solver with timer.
+You will need OCaml to run the solver. Currently, the solver has no main function. I recommened loading the source file into OCaml's `toplevel` (the OCaml interactive session) to try it out.
+
+Solver is found in `src/countdown.ml`. Use `timed_solve <target> <numbers list>` to run solver with timer.
 
 e.g.
 ```
