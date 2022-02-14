@@ -1,5 +1,5 @@
 # CountdownSolver
-A simple solver for a puzzle game similar to the Numbers round of the Countdown game show
+A simple solver for a puzzle game similar to the Numbers round from the Countdown game show
 
 ## Usage
 
