@@ -10,30 +10,29 @@ Solver is found in `src/countdown.ml`. Use `timed_solve <target> <numbers list>`
 e.g.
 ```
 # timed_solve 937 [15;10;53;2;41;19];;
-solution found: ((53*(19-2))+(41-(15-10)))
-Configurations explored: 41352
-Execution time: 0.344853s
+solution found: (((53*(19-2))-(15-10))+41)
+Configurations explored: 141801
+Execution time: 0.241036s
 ```
 
 A standard Numbers round contains 6 numbers and a target, all of which need to be 3 digits or less. This solver can take numbers of any size and any number of numbers as long as they are positive and integers, with no fractional part in any of the computations needed.
 
 e.g.
 ```
-# timed_solve 937 [15;10;53;2;41;19;20;10];;
-solution found: ((((20+15)+10)*19)+(41*2))
-solution found: ((53*19)-((20+15)*2))
-solution found: ((53*19)-((20+15)*2))
-solution found: ((53*(19-2))+(41-(15-10)))
-solution found: (((41*20)-53)+((15+2)*10))
-solution found: ((53*19)-(10*((20+2)-15)))
-solution found: (((((41+20)-15)*19)+10)+53)
-solution found: ((((41+20)-15)*19)+(53+10))
-solution found: (((41+10)*(20-2))+19)
-solution found: ((((53+20)*15)+(41*19))/2)
-solution found: ((((20*19)+(53+15))*2)+41)
-solution found: ((((53+20)*(15-2))+19)-(41-10))
-Configurations explored: 577966
-Execution time: 6.827676s
+# timed_solve 937 [15;10;53;2;41;19;20];;
+Solutions found: 10
+937 = (((((53+41)*10)-2)-20)+19)
+937 = (((53*(19-2))-(15-10))+41)
+937 = (((41+10)*(20-2))+19)
+937 = (((41+(15-10))*20)+(19-2))
+937 = (((((53+15)-19)*20)-41)-2)
+937 = ((53*19)-((20+15)*2))
+937 = ((53*20)-(41*((15-10)-2)))
+937 = ((((15+10)+20)*(41-19))-53)
+937 = (((((15+10)*19)+20)*2)-53)
+937 = ((((53*41)+(20-19))/2)-(15*10))
+Configurations explored: 2540486
+Execution time: 5.211323s
 ```
 
 ## Base algorithm
@@ -73,13 +72,13 @@ Configurations are lists of numbers `[N_1; ... ; N_n]`. Given a configuration `C
   - No fractional part: skip if `N_i mod N_j <> 0`
   - "Left identity" (don't know what this is called): skip if `N_i = N_j^2`
 
-### Basic Explore-Set Memoisation
+### Basic Explore-Set Memoisation [superseeded]
 Configurations become lists of numbers with the expressions used to produce them: `[(N_1,E_1); ... ; (N_n,E_n)]`.
 e.g. `[(2,1+1); (3,2+1); (5,5); (6,3*2)]`
 
 Add a hashtable `memo` of all configurations seen. If an operation `N_i (+) N_j` were to produce a configuration `C'` such that `memo(C')` exists, then the operation is skipped. If `memo(C')` does not exist, then `memo` is updated with `C'`.
 
-### Normalised Minimal Configuration Memoisation
+### Normalised Minimal Configuration Memoisation [superseeded]
 Instead of remembering a configuration `C`, memo now remembers a minimal and normalised version `norm(min(C))`.
 
 - *Normalisation*: simply sorts `C` from smallest to largest.
@@ -88,6 +87,9 @@ e.g. `[5;2;3;4]` and `[2;5;4;3]` would both normalise to the same configuration 
 e.g. `[(2,1+1); (3,2+1); (5,5); (6,3*2)] => [(2,[1;1]); (3,[1;2]); (5,[5]); (6,[2;3])]`
 
 The intuition is that minimisation captures an equivalence class defined by transposition (rearrangement) of expressions as symbolic expressions (without reduction), whereas normalisation captures an equivalence class defined by the order in which non-interfering pairs are chosen, as well as some convergent paths in the exploration (including associative operations on the same numbers).
+
+### Dropped-Expression Normalised Configuration Memoisation [current]
+This is in fact the more obvious way of doing explore-set memoisation. Instead of keeping track of the expression or the numbers involved in the expressions, it suffices to remember just the results in the configuration. By dropping the expressions, we capture all possible ways to reach a given set of numbers, including symbolic transposition.
 
 ### Tail Recursion
 Transforming all functions to be tail-recursive is an obvious standard optimisation that was very significant in this exercise. I observed a speed up of at least an order of magnitude or two just by making every function tail recursive.
