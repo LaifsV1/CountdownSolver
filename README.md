@@ -10,9 +10,10 @@ Solver is found in `src/countdown.ml`. Use `timed_solve <target> <numbers list>`
 e.g.
 ```
 # timed_solve 937 [15;10;53;2;41;19];;
-solution found: (((53*(19-2))-(15-10))+41)
+Solutions found: 1
+937 = (((53*(19-2))-(15-10))+41)
 Configurations explored: 141801
-Execution time: 0.241036s
+Execution time: 0.213400s
 ```
 
 A standard Numbers round contains 6 numbers and a target, all of which need to be 3 digits or less. This solver can take numbers of any size and any number of numbers as long as they are positive and integers, with no fractional part in any of the computations needed.
