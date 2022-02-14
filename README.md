@@ -61,15 +61,17 @@ Configurations are lists of numbers `[N_1; ... ; N_n]`. Given a configuration `C
   - Right identity: skip if `N_j = 0`
 - *Subtraction*:
   - No negatives: skip if `N_j > N_i`
-  - Identity: skip if `N_j = 0`
+  - Right identity: skip if `N_j = 0`
+  - "Left identity" (don't know what this is called): skip if `N_i = 2N_j`
 - *Multiplication*:
   - Commutativity: skip if `N_j > N_i`
   - Left identity: skip if `N_i = 1`
   - Right identity: skip if `N_j = 1`
 - *Division*:
-  - Identity: skip if `N_j = 1`
+  - Right identity: skip if `N_j = 1`
   - Division by zero: skip if `N_j = 0`
   - No fractional part: skip if `N_i mod N_j <> 0`
+  - "Left identity" (don't know what this is called): skip if `N_i = N_j^2`
 
 ### Basic Explore-Set Memoisation
 Configurations become lists of numbers with the expressions used to produce them: `[(N_1,E_1); ... ; (N_n,E_n)]`.

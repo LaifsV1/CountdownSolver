@@ -207,3 +207,68 @@ solution found: ((47*(71-43))-((53*4)+107))
 Configurations explored: 38352
 Execution time: 0.391457s
 ```
+
+## MERGED SOLUTION CHECKING AND SOLVED REMOVAL WITH MEMOISATION
+
+### REMOVING SOLVED
+```
+# timed_solve 937 [15;10;53;2;41;19;20;10];;
+solution found: (((41*20)-19)+((53+15)*2))
+solution found: (((41*20)-53)+((15+2)*10))
+solution found: ((53*(19-2))+(41-(15-10)))
+solution found: (((41+10)*(53-(20+15)))+19)
+solution found: ((53*19)-((20+15)*2))
+solution found: ((53*19)-((20+15)*2))
+solution found: ((((20+10)+15)*19)+(41*2))
+solution found: ((((20+10)+15)*(41-19))-53)
+solution found: ((53*19)-(10*((20+2)-15)))
+solution found: (((41+10)*(20-2))+19)
+solution found: (((41*15)+((20*19)-53))-(10/2))
+solution found: ((((20*19)+(53+15))*2)+41)
+Configurations explored: 578271
+Execution time: 2.174316s
+```
+
+### WITHOUT REMOVING SOLVED
+```
+timed_solve 937 [15;10;53;2;41;19;20;10];;
+solution found: (((41*20)-19)+((53+15)*2))
+solution found: (((41*20)-53)+((15+2)*10))
+solution found: ((53*(19-2))+(41-(15-10)))
+solution found: (((41+10)*(53-(20+15)))+19)
+solution found: ((53*19)-((20+15)*2))
+solution found: ((53*19)-((20+15)*2))
+solution found: ((((20+10)+15)*19)+(41*2))
+solution found: ((((20+10)+15)*(41-19))-53)
+solution found: ((53*19)-(10*((20+2)-15)))
+solution found: (((41+10)*(20-2))+19)
+solution found: (((41*15)+((20*19)-53))-(10/2))
+solution found: ((((20*19)+(53+15))*2)+41)
+Configurations explored: 578286
+Execution time: 2.467325s
+```
+
+## Added "left identity" for sub and div
+
+```
+# timed_solve 937 [15;10;53;2;41;19];;
+solution found: ((53*(19-2))+(41-(15-10)))
+Configurations explored: 41218
+Execution time: 0.137281s
+
+# timed_solve 937 [15;10;53;2;41;19;20;10];;
+solution found: (((41*20)-19)+((53+15)*2))
+solution found: (((41*20)-53)+((15+2)*10))
+solution found: ((53*(19-2))+(41-(15-10)))
+solution found: (((41+10)*(53-(20+15)))+19)
+solution found: ((53*19)-((20+15)*2))
+solution found: ((53*19)-((20+15)*2))
+solution found: ((((20+10)+15)*19)+(41*2))
+solution found: ((((20+10)+15)*(41-19))-53)
+solution found: ((53*19)-(10*((20+2)-15)))
+solution found: (((41+10)*(20-2))+19)
+solution found: (((41*15)+((20*19)-53))-(10/2))
+solution found: ((((20*19)+(53+15))*2)+41)
+Configurations explored: 563259
+Execution time: 2.032601s
+```
